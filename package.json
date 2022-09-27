@@ -9,5 +9,12 @@
   "type": "module",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.24.0"
+  },
+  "dependencies": {
+    "colorette": "^2.0.19",
+    "inquirer": "^9.1.2"
+  }
 }
