@@ -1,5 +1,6 @@
 import inquirer from "inquirer";
-import { greenBright, redBright } from "colorette";
+import { greenBright, italic, redBright } from "colorette";
+import figlet from "figlet";
 
 const questions = [
     {
@@ -38,9 +39,8 @@ const questions = [
 
 const titleMenu = async () => {
     console.clear();
-    console.log(`\n${greenBright('-----------------------------------------')}`);
-    console.log(`${redBright('TODO')}`);
-    console.log(`${greenBright('-----------------------------------------')}`);
+    console.log(`${redBright(figlet.textSync('Dev Team', {horizontalLayout: 'full'}))}`);
+    console.log();
 }
 
 const mainMenu = async() => {
