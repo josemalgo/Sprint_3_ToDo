@@ -1,10 +1,11 @@
 import { Task } from '../models/Task.js';
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, appendFile } from 'node:fs/promises';
 
 const getAllTasks = async () => {
     try {
-        let data = await readFile('./app/repositories/data.json', 'utf8');
-        return data;
+        let rawdata = await readFile('./app/repositories/data.json');
+        let tasks = JSON.parse(rawdata) 
+        return tasks;
     }
     catch (err) {
         return err;
@@ -13,7 +14,7 @@ const getAllTasks = async () => {
 
 const getTaskById = async (req) => {
     try {
-        let task = await readFile('./data.json', 'utf8');
+        let task = await readFile('./data.json');
         return task;
     }
     catch (err) {
@@ -22,9 +23,11 @@ const getTaskById = async (req) => {
 }
 
 const addTask = async (req) => {
-    let task = new Task(req.name.name, req.user);
     try {
-        await writeFile('./app/repositories/data.json', JSON.stringify(task));
+        let task = new Task(req.name, req.user);
+        let tasks = await getAllTasks();
+        tasks.push(data);
+        await appendFile('./app/repositories/data.json', JSON.stringify(task, null, 2));
     }
     catch(err) {
         return err;

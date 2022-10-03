@@ -1,11 +1,11 @@
 import * as jsonRepository from '../repositories/jsonRespository.js';
 
-const getAllTasks = () => {
-    return jsonRepository.getAllTasks();
+const getAllTasks = async() => {
+    return await jsonRepository.getAllTasks();
 }
 
-const getTaskById = (id) => {
-    
+const getTaskById = async (id) => {
+    return await jsonRepository.getTaskById(id);
 }
 
 const createTask = (req) => {

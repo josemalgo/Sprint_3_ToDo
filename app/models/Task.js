@@ -1,11 +1,13 @@
+import {STATE} from '../enum/stateEnum.js';
+
 export class Task {
     
     constructor(name, user) {
         this.name = name;
         this.user = user;
-        this.hourStart = "";
+        this.hourStart = new Date().toLocaleTimeString();
         this.hourFinish = "";
-        this.state = "";
+        this.state = STATE.PENDING;
     }
 
     showState(){
