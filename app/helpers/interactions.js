@@ -1,6 +1,7 @@
 import inquirer from "inquirer";
 import { greenBright, italic, redBright } from "colorette";
 import figlet from "figlet";
+import { STATE } from '../enum/stateEnum.js';
 
 const questions = [
     {
@@ -47,28 +48,99 @@ const mainMenu = async () => {
     return option;
 }
 
-const inputName = async () => {
+const readInput = async (message) => {
     const { name } = await inquirer.prompt({
         type: "input",
         name: "name",
-        message: "Introduce el nombre de la tarea: "
+        message: message,
+        validate: function(input) {
+            if(input.length === 0) {
+                return "Debes escribir un valor";
+            }
+
+            return true;
+        }
     });
 
     return name;
 }
 
-const inputUser = async () => {
-    const { user } = await inquirer.prompt({
-        type: "input",
-        name: "user",
-        message: "Introduce el nombre de usuario: "
+const AllTasksMenu = async (tasks) => {
+    console.log();
+    const { id } = await inquirer.prompt(AllTasksQuestions(tasks));
+    return id;
+}
+
+const AllTasksQuestions = (tasks) => {
+    const choices = tasks.map((task) => {
+        return {
+            value: task.id,
+            name: ` ${task.name} - ${task.user} - ${task.state}`
+        };
     });
 
-    return user;
+    return [
+        {
+            type: "rawlist",
+            name: "id",
+            message: "Escoge la tarea que quieres modificar: \n",
+            choices: choices
+        }
+    ]
+}
+
+const changeState = async () => {
+    const { state } = await inquirer.prompt([
+        {
+            type: "rawlist",
+            name: "state",
+            message: "Elige el nuevo estado de la tarea: ",
+            choices: [
+                {
+                    value: STATE.PENDING,
+                    name: STATE.PENDING
+                },
+                {
+                    value: STATE.EXECUTION,
+                    name: STATE.EXECUTION
+                },
+                {
+                    value: STATE.FINISHED,
+                    name: STATE.FINISHED
+                }
+            ]
+        }
+    ]);
+
+    return state;
+}
+
+const updateMenu = async () => {
+    const { option } = await inquirer.prompt([
+        {
+            type: "rawlist",
+            name: "option",
+            message: "Elige una opción: ",
+            choices: [
+                {
+                    value: 1,
+                    name: "Cambiar estado de la tarea"
+                },
+                {
+                    value: 2,
+                    name: "Cambiar nombre de la tarea"
+                }
+            ]
+        }
+    ]);
+
+    return option;
 }
 
 export {
     mainMenu,
-    inputName,
-    inputUser
+    readInput,
+    AllTasksMenu,
+    changeState,
+    updateMenu
 };

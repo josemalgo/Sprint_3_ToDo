@@ -12,8 +12,8 @@ const createTask = (req) => {
     jsonRepository.addTask(req);
 }
 
-const updateTask = (id, task) => {
-    
+const updateTask = async (id, task) => {
+    return await jsonRepository.updateTask(id, task);
 }
 
 const deleteTask = (id) => {

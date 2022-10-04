@@ -6,5 +6,21 @@
     "hourStart": "12:55:27",
     "hourFinish": "",
     "state": "Pendent"
+  },
+  {
+    "id": "7d346b15-a156-412c-aff8-787414379cdb",
+    "name": "Gimnasio",
+    "user": "JuanMa",
+    "hourStart": "15:54:03",
+    "hourFinish": "",
+    "state": "Pendent"
+  },
+  {
+    "id": "fdfe5141-88b0-49d7-998d-51bdc48ba8ec",
+    "name": "Pasear perro",
+    "user": "Jose",
+    "hourStart": "17:48:46",
+    "hourFinish": "18:11:01",
+    "state": "Acabada"
   }
 ]
