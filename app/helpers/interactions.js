@@ -1,5 +1,6 @@
 import inquirer from "inquirer";
-import { greenBright, redBright } from "colorette";
+import { greenBright, italic, redBright } from "colorette";
+import figlet from "figlet";
 
 const questions = [
     {
@@ -10,7 +11,6 @@ const questions = [
             {
                 value: 1,
                 name: 'Create task'
-
             },
             {
                 value: 2,
@@ -37,16 +37,38 @@ const questions = [
 ]
 
 const titleMenu = async () => {
-    console.clear();
-    console.log(`\n${greenBright('-----------------------------------------')}`);
-    console.log(`${redBright('TODO')}`);
-    console.log(`${greenBright('-----------------------------------------')}`);
+    console.log(`${redBright(figlet.textSync('Dev Team', { horizontalLayout: 'full' }))}`);
+    console.log();
 }
 
-const mainMenu = async() => {
+const mainMenu = async () => {
     await titleMenu();
     const { option } = await inquirer.prompt(questions);
     return option;
 }
 
-export {mainMenu};
+const inputName = async () => {
+    const { name } = await inquirer.prompt({
+        type: "input",
+        name: "name",
+        message: "Introduce el nombre de la tarea: "
+    });
+
+    return name;
+}
+
+const inputUser = async () => {
+    const { user } = await inquirer.prompt({
+        type: "input",
+        name: "user",
+        message: "Introduce el nombre de usuario: "
+    });
+
+    return user;
+}
+
+export {
+    mainMenu,
+    inputName,
+    inputUser
+};
