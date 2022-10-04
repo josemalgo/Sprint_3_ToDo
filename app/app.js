@@ -17,12 +17,13 @@ const main = async () => {
                 let name = await interaction.readInput("Escribe el título de la tarea");
                 let user = await interaction.readInput("Escribe el nombre del usuario que realizará la tarea");
 
-                controller.createTask({ name, user });
+                await controller.createTask({ name, user });
                 break;
             case 2:
                 await updateTask();
                 break;
             case 3:
+                await deleteTask();
                 break;
             case 4:
                 data = await controller.getAllTasks();
@@ -55,8 +56,8 @@ const showTasks = (tasks) => {
 };
 
 const updateTask = async () => {
-    let tasks = await controller.getAllTasks();
-    let id = await interaction.AllTasksMenu(tasks);
+    
+    let id = await getIdTask("Escoge la tarea que quieres modificar: \n");
     let task = await controller.getTaskById(id);
     let option = await interaction.updateMenu();
 
@@ -67,13 +68,27 @@ const updateTask = async () => {
             await controller.updateTask(id, task);
             break;
         case 2:
-            let newName = await interaction.readInput("Introduce el nuevo título de la tarea");
+            let newName = await interaction.readInput("Introduce el nuevo título de la tarea: ");
             task.name = newName;
             await controller.updateTask(id, task);
             break;
-        default:
-            break;
     }
+}
+
+const deleteTask = async () => {
+    let id = await getIdTask("Escoge la tarea que quieres eliminar: \n");
+    let confirmation = await interaction.deleteConfirm();
+
+    if(confirmation) {
+        await controller.deleteTask(id)
+    }    
+}
+
+const getIdTask = async (message) => {
+    let tasks = await controller.getAllTasks();
+    let id = await interaction.AllTasksMenu(tasks, message);
+    
+    return id;
 }
 
 main();

@@ -8,7 +8,7 @@ const getTaskById = async (id) => {
     return await jsonRepository.getTaskById(id);
 }
 
-const createTask = (req) => {
+const createTask = async (req) => {
     jsonRepository.addTask(req);
 }
 
@@ -16,8 +16,8 @@ const updateTask = async (id, task) => {
     return await jsonRepository.updateTask(id, task);
 }
 
-const deleteTask = (id) => {
-    
+const deleteTask = async (id) => {
+    return await jsonRepository.deleteTask(id);
 }
 
 export {

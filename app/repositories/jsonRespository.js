@@ -53,8 +53,12 @@ const updateTask = async (id, newTask) => {
     saveJSON(tasks);
 }
 
-const deleteTask = async (req) => {
+const deleteTask = async (id) => {
+    let tasks = await getAllTasks();
+    let index = tasks.findIndex(task => task.id === id);
+    tasks.splice(index, 1);
 
+    saveJSON(tasks);
 }
 
 const saveJSON = async (tasks) => {

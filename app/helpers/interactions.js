@@ -55,7 +55,7 @@ const readInput = async (message) => {
         message: message,
         validate: function(input) {
             if(input.length === 0) {
-                return "Debes escribir un valor";
+                return "Debes escribir un valor!";
             }
 
             return true;
@@ -65,13 +65,13 @@ const readInput = async (message) => {
     return name;
 }
 
-const AllTasksMenu = async (tasks) => {
+const AllTasksMenu = async (tasks, message) => {
     console.log();
-    const { id } = await inquirer.prompt(AllTasksQuestions(tasks));
+    const { id } = await inquirer.prompt(AllTasksQuestions(tasks, message));
     return id;
 }
 
-const AllTasksQuestions = (tasks) => {
+const AllTasksQuestions = (tasks, message) => {
     const choices = tasks.map((task) => {
         return {
             value: task.id,
@@ -83,7 +83,7 @@ const AllTasksQuestions = (tasks) => {
         {
             type: "rawlist",
             name: "id",
-            message: "Escoge la tarea que quieres modificar: \n",
+            message: message,
             choices: choices
         }
     ]
@@ -124,11 +124,11 @@ const updateMenu = async () => {
             choices: [
                 {
                     value: 1,
-                    name: "Cambiar estado de la tarea"
+                    name: "Cambiar estado de la tarea: "
                 },
                 {
                     value: 2,
-                    name: "Cambiar nombre de la tarea"
+                    name: "Cambiar nombre de la tarea: "
                 }
             ]
         }
@@ -137,10 +137,21 @@ const updateMenu = async () => {
     return option;
 }
 
+const deleteConfirm = async () => {
+    const { result } = await inquirer.prompt({
+        type: "confirm",
+        name: "result",
+        message: "Are you sure to delete this task? "
+    });
+
+    return result;
+}
+
 export {
     mainMenu,
     readInput,
     AllTasksMenu,
     changeState,
-    updateMenu
+    updateMenu,
+    deleteConfirm
 };
