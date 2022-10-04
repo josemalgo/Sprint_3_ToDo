@@ -4,6 +4,7 @@ import * as controller from './controllers/task-controller.js';
 const main = async () => {
 
     let menu = true;
+    console.clear();
 
     do {
 
@@ -33,13 +34,19 @@ const main = async () => {
 
 }
 
-const showTasks = ( task ) => {
-    console.log( "______ TASKS ______" );
-    console.log( `Name: ${task.name}` );
-    console.log( `User: ${task.name}` );
-    console.log( `Estat: ${task.name}` );
-    console.log( `Hora inici: ${task.name}` );
-    console.log( `Hora final: ${task.name}` );
+const showTasks = ( tasks ) => {
+    console.log();
+    console.log( "________ TASKS ________" );
+    tasks.forEach(task => {
+        console.log();
+        console.log('--------------------');
+        console.log( `Nom tasca: ${task.name}` );
+        console.log( `Usuari: ${task.user}` );
+        console.log( `Estat: ${task.state}` );
+        console.log( `Hora inici: ${task.hourStart}` );
+        console.log( `Hora final: ${task.hourFinish}` );    
+        console.log('--------------------');
+    });
 };
 
 main();

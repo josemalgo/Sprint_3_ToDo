@@ -26,8 +26,8 @@ const addTask = async (req) => {
     try {
         let task = new Task(req.name, req.user);
         let tasks = await getAllTasks();
-        tasks.push(data);
-        await appendFile('./app/repositories/data.json', JSON.stringify(task, null, 2));
+        await tasks.push(task);
+        await writeFile('./app/repositories/data.json', JSON.stringify(tasks, null, 2));
     }
     catch(err) {
         return err;

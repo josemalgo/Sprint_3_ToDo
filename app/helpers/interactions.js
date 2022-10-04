@@ -11,7 +11,6 @@ const questions = [
             {
                 value: 1,
                 name: 'Create task'
-
             },
             {
                 value: 2,
@@ -38,7 +37,6 @@ const questions = [
 ]
 
 const titleMenu = async () => {
-    console.clear();
     console.log(`${redBright(figlet.textSync('Dev Team', { horizontalLayout: 'full' }))}`);
     console.log();
 }
