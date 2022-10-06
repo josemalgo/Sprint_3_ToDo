@@ -16,6 +16,7 @@
   "dependencies": {
     "colorette": "^2.0.19",
     "figlet": "^1.5.2",
-    "inquirer": "^9.1.2"
+    "inquirer": "^9.1.2",
+    "mysql": "^2.18.1"
   }
 }
