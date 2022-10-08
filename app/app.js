@@ -2,6 +2,10 @@ import * as interaction from './helpers/interactions.js';
 import * as controller from './controllers/task-controller.js';
 import inquirer from 'inquirer';
 
+const DbProvider = () => {
+
+}
+
 const main = async () => {
 
     let menu = true;
