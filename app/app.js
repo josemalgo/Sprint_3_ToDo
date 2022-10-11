@@ -1,13 +1,17 @@
 import * as interaction from './helpers/interactions.js';
 import * as controller from './controllers/task-controller.js';
-import inquirer from 'inquirer';
+import { selectDatabase } from './database/database.js';
 
-const DbProvider = () => {
+const DbProvider = async () => {
+    console.clear();
 
+    let option = await interaction.mainDB();
+    await selectDatabase(option);
 }
 
 const main = async () => {
 
+    await DbProvider();
     let menu = true;
     let data = [];
     console.clear();
@@ -53,14 +57,14 @@ const showTasks = (tasks) => {
         console.log(`Títol: ${task.name}`);
         console.log(`Usuari: ${task.user}`);
         console.log(`Estat: ${task.state}`);
-        console.log(`Hora inici: ${task.hourStart}`);
-        console.log(`Hora final: ${task.hourFinish}`);
+        console.log(`Hora inici: ${task.createdAt}`);
+        console.log(`Hora final: ${task.completedAt}`);
         console.log('--------------------');
     });
 };
 
 const updateTask = async () => {
-    
+
     let id = await getIdTask("Escoge la tarea que quieres modificar: \n");
     let task = await controller.getTaskById(id);
     let option = await interaction.updateMenu();
@@ -83,15 +87,15 @@ const deleteTask = async () => {
     let id = await getIdTask("Escoge la tarea que quieres eliminar: \n");
     let confirmation = await interaction.deleteConfirm();
 
-    if(confirmation) {
+    if (confirmation) {
         await controller.deleteTask(id)
-    }    
+    }
 }
 
 const getIdTask = async (message) => {
     let tasks = await controller.getAllTasks();
     let id = await interaction.AllTasksMenu(tasks, message);
-    
+
     return id;
 }
 

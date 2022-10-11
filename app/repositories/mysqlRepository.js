@@ -1,31 +1,56 @@
-import mysql from 'mysql2/promise'
+import { STATE } from "../enum/stateEnum.js";
+import { TaskModelSQL } from "../database/database.js";
 
-const connection = await mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'swordfish',
-    database: 'sql_store'
-});
-
-connection.connect();
-
-const createDatabase = async () => {
-
+export const getAllTasks = async () => {
     try {
-        await connection.query(
-            "DROP DATABASE IF EXISTS `sql_ToDo`;"
-        );
-
-        await connection.query(
-            "CREATE DATABASE `sql_ToDo`;"
-        );
+        const tasks = await TaskModelSQL.findAll();
+        return tasks;
+    } catch (error) {
+        throw error;
     }
-    catch (err) {
-        throw err;
-    }
-
 }
 
-createDatabase();
+export const getTaskById = async (req) => {
+    try {
+        const task = await TaskModelSQL.findByPk(req);
+        return task;
+    } catch (error) {
+        throw error;
+    }
+}
 
+export const addTask = async (req) => {
+    try {
+        await TaskModelSQL.create({
+            name: req.name,
+            user: req.user
+        });
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const updateTask = async (id, newTask) => {
+    try {
+        const task = await TaskModelSQL.findByPk(id);
+        task.name = newTask.name;
+        task.state = newTask.state;
+        if (newTask.state === STATE.FINISHED){
+            task.completedAt = new Date().toLocaleTimeString();
+        }
+        task.save();
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const deleteTask = async (id) => {
+    try {
+        await TaskModelSQL.destroy({
+            where: {id}
+        });
+    } catch (error) {
+        throw error;
+    }
+}
 

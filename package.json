@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node app/app.js"
   },
   "type": "module",
   "keywords": [],
@@ -17,6 +17,7 @@
     "colorette": "^2.0.19",
     "figlet": "^1.5.2",
     "inquirer": "^9.1.2",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.24.0"
   }
 }

@@ -11,9 +11,5 @@ export class Task {
         this.hourFinish = "";
         this.state = STATE.PENDING;
     }
-
-    showState(){
-        console.log(`The task ${this.name} `);
-        console.log(`State:  ${this.state} `);
-    }
 }
+
