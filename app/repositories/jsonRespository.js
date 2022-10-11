@@ -1,6 +1,6 @@
 import { Task } from '../models/Task.js';
 import { STATE } from '../enum/stateEnum.js';
-import { readFile, writeFile, appendFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 
 const getAllTasks = async () => {
     try {

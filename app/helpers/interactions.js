@@ -37,6 +37,28 @@ const questions = [
     }
 ]
 
+const questionsDB = [
+    {
+        type: 'rawlist',
+        name: 'option',
+        message: 'Choose persistence method: ',
+        choices: [
+            {
+                value: 1,
+                name: 'JSON'
+            },
+            {
+                value: 2,
+                name: 'MySQL'
+            },
+            {
+                value: 3,
+                name: 'Moongo'
+            }
+        ]
+    }
+]
+
 const titleMenu = async () => {
     console.log(`${redBright(figlet.textSync('Dev Team', { horizontalLayout: 'full' }))}`);
     console.log();
@@ -45,6 +67,12 @@ const titleMenu = async () => {
 const mainMenu = async () => {
     await titleMenu();
     const { option } = await inquirer.prompt(questions);
+    return option;
+}
+
+const mainDB = async () => {
+    await titleMenu();
+    const { option } = await inquirer.prompt(questionsDB);
     return option;
 }
 
@@ -153,5 +181,6 @@ export {
     AllTasksMenu,
     changeState,
     updateMenu,
-    deleteConfirm
+    deleteConfirm,
+    mainDB
 };
