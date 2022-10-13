@@ -1,7 +1,9 @@
 import mysql from 'mysql2/promise';
 import { Sequelize } from 'sequelize';
+import { MongoClient } from 'mongodb';
 import * as jsonRepository from '../repositories/jsonRespository.js';
 import * as mysqlRepository from '../repositories/mysqlRepository.js';
+import * as mongoRepository from '../repositories/mongoRepository.js';
 import {STATE} from '../enum/stateEnum.js';
 import { DataTypes } from 'sequelize';
 
@@ -68,6 +70,7 @@ export const createMySQLDatabase = async () => {
 
 export let DB_PROVIDER = jsonRepository;
 
+
 export const selectDatabase = async (option) => {
 
     switch (option) {
@@ -80,6 +83,20 @@ export const selectDatabase = async (option) => {
             await sequelize.sync({force: false});
             break;
         case 3:
+            DB_PROVIDER = mongoRepository;
+            
             break;
+    }
+}
+
+const uri = "mongodb+srv://josemalgo:swordfish@tododb.uemqvzk.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri);
+const runMongo = () => {
+    try {
+        const database = client.db("ToDoDB");
+        database.createCollection("Tasks");
+        
+    } catch (error) {
+        
     }
 }

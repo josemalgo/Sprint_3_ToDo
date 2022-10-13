@@ -17,6 +17,7 @@
     "colorette": "^2.0.19",
     "figlet": "^1.5.2",
     "inquirer": "^9.1.2",
+    "mongodb": "4.10",
     "mysql2": "^2.3.3",
     "sequelize": "^6.24.0"
   }

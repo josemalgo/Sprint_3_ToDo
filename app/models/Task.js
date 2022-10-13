@@ -1,5 +1,6 @@
 import {STATE} from '../enum/stateEnum.js';
 import crypto from 'node:crypto';
+import { Interface } from 'node:readline';
 
 export class Task {
     
@@ -12,4 +13,3 @@ export class Task {
         this.state = STATE.PENDING;
     }
 }
-
