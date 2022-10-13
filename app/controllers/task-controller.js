@@ -1,23 +1,23 @@
-import * as jsonRepository from '../repositories/jsonRespository.js';
+import { DB_PROVIDER } from '../database/database.js';
 
 const getAllTasks = async() => {
-    return await jsonRepository.getAllTasks();
+    return await DB_PROVIDER.getAllTasks();
 }
 
 const getTaskById = async (id) => {
-    return await jsonRepository.getTaskById(id);
+    return await DB_PROVIDER.getTaskById(id);
 }
 
 const createTask = async (req) => {
-    jsonRepository.addTask(req);
+    await DB_PROVIDER.addTask(req);
 }
 
 const updateTask = async (id, task) => {
-    return await jsonRepository.updateTask(id, task);
+    return await DB_PROVIDER.updateTask(id, task);
 }
 
 const deleteTask = async (id) => {
-    return await jsonRepository.deleteTask(id);
+    return await DB_PROVIDER.deleteTask(id);
 }
 
 export {
