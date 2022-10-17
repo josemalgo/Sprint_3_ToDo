@@ -53,7 +53,7 @@ const questionsDB = [
             },
             {
                 value: 3,
-                name: 'Moongo'
+                name: 'MoongoDB'
             }
         ]
     }

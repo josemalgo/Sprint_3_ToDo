@@ -12,4 +12,3 @@ export class Task {
         this.state = STATE.PENDING;
     }
 }
-
