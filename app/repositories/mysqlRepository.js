@@ -38,7 +38,7 @@ export const updateTask = async (id, newTask) => {
         if (newTask.state === STATE.FINISHED){
             task.completedAt = new Date().toLocaleTimeString();
         }
-        task.save();
+        await task.save();
     } catch (error) {
         throw error;
     }

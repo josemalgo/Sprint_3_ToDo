@@ -22,8 +22,8 @@ const main = async () => {
 
         switch (option) {
             case 1:
-                let name = await interaction.readInput("Escribe el título de la tarea");
-                let user = await interaction.readInput("Escribe el nombre del usuario que realizará la tarea");
+                let name = await interaction.readInput("Escribe el título de la tarea: ");
+                let user = await interaction.readInput("Escribe el nombre del usuario que realizará la tarea: ");
 
                 await controller.createTask({ name, user });
                 break;
