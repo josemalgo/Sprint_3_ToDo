@@ -7,8 +7,8 @@ export class Task {
         this.id = crypto.randomUUID();
         this.name = name;
         this.user = user;
-        this.hourStart = new Date().toLocaleTimeString();
-        this.hourFinish = "";
+        this.createdAt = new Date().toLocaleTimeString();
+        this.completedAt = "";
         this.state = STATE.PENDING;
     }
 }

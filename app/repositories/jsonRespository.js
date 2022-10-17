@@ -48,7 +48,7 @@ const updateTask = async (id, newTask) => {
         tasks[index].state = newTask.state;
     
     if(newTask.state === STATE.FINISHED)
-        tasks[index].hourFinish = new Date().toLocaleTimeString();
+        tasks[index].completedAt = new Date().toLocaleTimeString();
     
     saveJSON(tasks);
 }
