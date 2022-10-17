@@ -12,7 +12,7 @@ export const getAllTasks = async () => {
 
 export const getTaskById = async (req) => {
     try {
-        const task = await Task.findOne({id: req});
+        const task = await Task.findOne({ _id: req });
         return task;
     } catch (error) {
         throw error;
@@ -33,15 +33,25 @@ export const addTask = async (req) => {
 
 export const updateTask = async (id, newTask) => {
     try {
-        if (newTask.state === STATE.FINISHED){
-            task.completedAt = new Date().toLocaleTimeString();
-        }
-
         const task = await Task.updateOne(
-            {id: id},
-            {name: newTask.name, state: newTask.state});
-        
-        await task.save();
+            { _id: id },
+            [
+                {
+                    $set: {
+                        name: newTask.name,
+                        state: newTask.state,
+                        completedAt: 
+                        {
+                            $cond: [{$eq: [newTask.state, STATE.FINISHED]}, new Date().toLocaleTimeString(), undefined]
+                            //$cond: { if: { $eq: ["$state", STATE.FINISHED] }, then: new Date().toLocaleTimeString()}
+                        }
+                    }
+                }
+
+            ]
+        );
+
+        //await task.save();
     } catch (error) {
         throw error;
     }
@@ -49,7 +59,7 @@ export const updateTask = async (id, newTask) => {
 
 export const deleteTask = async (id) => {
     try {
-        await Task.deleteOne({id: id});
+        await Task.deleteOne({ _id: id });
     } catch (error) {
         throw error;
     }
